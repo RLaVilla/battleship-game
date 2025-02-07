@@ -1,7 +1,7 @@
-import { Ship } from "./ship";
 import { Gameboard } from "./gameboard";
 import { Player } from "./player";
 import { displayShips } from "./displayShips";
+import { gameOver } from "./modal";
 
 export function populateHome() {
   function createGrid(playerBoardId, isOpponent = false) {
@@ -23,9 +23,6 @@ export function populateHome() {
     }
   }
 
-  const newGameButton = document.getElementById("restart");
-  newGameButton.addEventListener("click", initializeGame);
-
   const pc = new Player("computer", "Computer");
   const human = new Player("real", "Human");
 
@@ -36,13 +33,68 @@ export function populateHome() {
 
     const attackResult = pc.gameboard.receiveAttack([row, col]);
 
-    if (attackResult === "hit") {
+    if (attackResult === "hit" || attackResult === "game over") {
       cell.classList.add("hit");
     } else if (attackResult === "miss") {
       cell.classList.add("miss");
+      cell.textContent = "•";
     }
 
-    cell.removeEventListener("click", handleCellClick);
+    if (attackResult === "game over") {
+      setTimeout(() => {
+        gameOver("You won! Game over.");
+      }, 1000);
+    } else {
+      const opponentBoard = document.getElementById("opponentBoard");
+      opponentBoard.classList.add("disabled");
+      const playerBoard = document.getElementById("playerBoard");
+      playerBoard.classList.remove("disabled");
+
+      if (!cell.classList.contains("hit") && !cell.classList.contains("miss")) {
+        cell.removeEventListener("click", handleCellClick);
+      }
+
+      setTimeout(pcMove, 1000);
+    }
+  }
+  const pcAttacks = new Set();
+
+  function pcMove() {
+    let col;
+    let row;
+
+    do {
+      row = Math.floor(Math.random() * 10);
+      col = Math.floor(Math.random() * 10);
+    } while (pcAttacks.has(`${row},${col}`));
+
+    pcAttacks.add(`${row},${col}`);
+
+    const cell = document.querySelector(
+      `[data-row="${row}"][data-col="${col}"]`
+    );
+    const attackResult = human.gameboard.receiveAttack([row, col]);
+
+    if (cell) {
+      if (attackResult === "hit" || attackResult === "game over") {
+        cell.classList.add("hit");
+      } else if (attackResult === "miss") {
+        cell.classList.add("miss");
+        cell.textContent = "•";
+      }
+    }
+    if (attackResult === "game over") {
+      setTimeout(() => {
+        gameOver("You Lost! Game Over.");
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        const opponentBoard = document.getElementById("opponentBoard");
+        opponentBoard.classList.remove("disabled");
+        const playerBoard = document.getElementById("playerBoard");
+        playerBoard.classList.add("disabled");
+      }, 1000);
+    }
   }
 
   function initializeGame() {
@@ -58,8 +110,6 @@ export function populateHome() {
     human.gameboard.placeRandomShips();
 
     displayShips(human.gameboard, "playerBoard");
-
-    newGameButton.style.display = "none";
   }
 
   initializeGame();
