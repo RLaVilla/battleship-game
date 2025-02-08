@@ -185,6 +185,24 @@ p.you {
   background-color: rgb(223, 223, 223);
 }
 
+@media (width > 1650px) {
+  #playerBoard,
+  #opponentBoard {
+    grid-template-columns: repeat(10, 60px);
+    grid-template-rows: repeat(10, 60px);
+    width: 600px;
+  }
+}
+
+@media (width > 1500px) {
+  #playerBoard,
+  #opponentBoard {
+    grid-template-columns: repeat(10, 55px);
+    grid-template-rows: repeat(10, 55px);
+    width: 550px;
+  }
+}
+
 @media (width < 1310px) {
   #playerBoard,
   #opponentBoard {
@@ -249,6 +267,7 @@ p.you {
 
   .boardCont {
     justify-content: center;
+    gap: 20px;
   }
 
   .header h1 {
@@ -268,10 +287,6 @@ p.you {
     width: 350px;
   }
 
-  .boardCont {
-    justify-content: center;
-  }
-
   .header h1 {
     font-size: 50px;
   }
@@ -287,10 +302,6 @@ p.you {
     grid-template-columns: repeat(10, 35px);
     grid-template-rows: repeat(10, 35px);
     width: 350px;
-  }
-
-  .boardCont {
-    justify-content: center;
   }
 
   .header h1 {
