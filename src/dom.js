@@ -37,7 +37,9 @@ export function populateHome() {
       cell.classList.add("hit");
     } else if (attackResult === "miss") {
       cell.classList.add("miss");
-      cell.textContent = "•";
+      const bullet = document.createElement("div");
+      bullet.classList.add("bullet");
+      cell.appendChild(bullet);
     }
 
     if (attackResult === "game over") {
@@ -80,7 +82,9 @@ export function populateHome() {
         cell.classList.add("hit");
       } else if (attackResult === "miss") {
         cell.classList.add("miss");
-        cell.textContent = "•";
+        const bullet = document.createElement("div");
+        bullet.classList.add("bullet");
+        cell.appendChild(bullet);
       }
     }
     if (attackResult === "game over") {

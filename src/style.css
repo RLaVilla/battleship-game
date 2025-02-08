@@ -94,6 +94,8 @@ p.you {
 
 .cell {
   border: 1px solid black;
+  display: grid;
+  place-items: center;
 }
 
 #opponentBoard .cell:hover {
@@ -124,6 +126,13 @@ p.you {
 .cell.miss {
   text-align: center;
   font-size: 40px;
+}
+
+.bullet {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: black;
 }
 
 #opponentBoard.disabled,
@@ -201,6 +210,10 @@ p.you {
     grid-template-rows: repeat(10, 55px);
     width: 550px;
   }
+  .bullet {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 @media (width < 1310px) {
@@ -246,6 +259,11 @@ p.you {
     grid-template-rows: repeat(10, 32px);
     width: 320px;
   }
+
+  .bullet {
+    width: 10px;
+    height: 10px;
+  }
 }
 
 @media (width < 836px) {
@@ -265,9 +283,17 @@ p.you {
     width: 350px;
   }
 
+  .header {
+    padding: 10px 20px;
+  }
+
   .boardCont {
     justify-content: center;
     gap: 20px;
+  }
+
+  #content {
+    grid-template-rows: 175px 2fr;
   }
 
   .header h1 {
@@ -287,6 +313,10 @@ p.you {
     width: 350px;
   }
 
+  #content {
+    grid-template-rows: 150px 2fr;
+  }
+
   .header h1 {
     font-size: 50px;
   }
@@ -302,6 +332,10 @@ p.you {
     grid-template-columns: repeat(10, 35px);
     grid-template-rows: repeat(10, 35px);
     width: 350px;
+  }
+
+  #content {
+    grid-template-rows: 125px 2fr;
   }
 
   .header h1 {
@@ -320,6 +354,10 @@ p.you {
     grid-template-rows: repeat(10, 30px);
     width: 300px;
   }
+  .bullet {
+    width: 8px;
+    height: 8px;
+  }
 }
 
 @media (width < 406px) {
@@ -328,6 +366,10 @@ p.you {
     grid-template-columns: repeat(10, 27px);
     grid-template-rows: repeat(10, 27px);
     width: 270px;
+  }
+
+  #content {
+    grid-template-rows: 110px 2fr;
   }
 
   .header h1 {
