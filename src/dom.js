@@ -31,6 +31,8 @@ export function populateHome() {
     const row = parseInt(cell.dataset.row);
     const col = parseInt(cell.dataset.col);
 
+    cell.removeEventListener("click", handleCellClick);
+
     const attackResult = pc.gameboard.receiveAttack([row, col]);
 
     if (attackResult === "hit" || attackResult === "game over") {
@@ -45,16 +47,12 @@ export function populateHome() {
     if (attackResult === "game over") {
       setTimeout(() => {
         gameOver("You won! Game over.");
-      }, 1000);
+      }, 500);
     } else {
       const opponentBoard = document.getElementById("opponentBoard");
       opponentBoard.classList.add("disabled");
       const playerBoard = document.getElementById("playerBoard");
       playerBoard.classList.remove("disabled");
-
-      if (!cell.classList.contains("hit") && !cell.classList.contains("miss")) {
-        cell.removeEventListener("click", handleCellClick);
-      }
 
       setTimeout(pcMove, 1000);
     }
@@ -90,7 +88,7 @@ export function populateHome() {
     if (attackResult === "game over") {
       setTimeout(() => {
         gameOver("You Lost! Game Over.");
-      }, 1000);
+      }, 500);
     } else {
       setTimeout(() => {
         const opponentBoard = document.getElementById("opponentBoard");
