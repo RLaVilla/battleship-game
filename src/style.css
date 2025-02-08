@@ -313,6 +313,10 @@ p.you {
     width: 350px;
   }
 
+  .header {
+    padding: 15px 30px;
+  }
+
   #content {
     grid-template-rows: 150px 2fr;
   }
@@ -370,6 +374,10 @@ p.you {
 
   #content {
     grid-template-rows: 110px 2fr;
+  }
+
+  .header {
+    padding: 10px 20px;
   }
 
   .header h1 {
