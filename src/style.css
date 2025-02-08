@@ -201,6 +201,11 @@ p.you {
     grid-template-rows: repeat(10, 60px);
     width: 600px;
   }
+
+  #content {
+    width: 90%;
+    margin: auto;
+  }
 }
 
 @media (width > 1500px) {
